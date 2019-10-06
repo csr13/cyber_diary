@@ -24,4 +24,7 @@ class TestFields(unittest.TestCase):
         pass
 
 
-class TestCrudMethods(unittest.TestCase)
+class TestCrudMethods(unittest.TestCase):
+
+    def setUp(self):
+        pass

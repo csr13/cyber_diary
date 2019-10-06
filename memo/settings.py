@@ -10,11 +10,19 @@ import warnings
 from components import Menu
 from colors import c
 
-NODE     = c(os.uname().nodename, "blue")
+try:
+
+    NODE = c(os.uname().nodename, "pink")
+
+except AttributeError:
+
+    NODE = c(os.getlogin(), "pink")
+
 
 BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)))
 
 STOR_DIR = os.path.join(BASE_DIR, 'storages')
+
 
 # Storage settings
 
@@ -34,21 +42,21 @@ try:
 
 except FileNotFoundError:
 
-    error = "\n<(Error)> Storage ~> %s not found\n" % (FILE)
+    error = "<(Error)> Storage ~> %s not found" % (FILE)
 
     time.sleep(1)
 
     print(c(error, "red"))
 
-    fix   = "\n<(Fix)> Creating storage ~> %s" % (FILE)
+    fix   = "<(Fix)> Creating storage ~> %s" % (FILE)
 
     time.sleep(1)
 
     print(c(fix, "yellow"))
 
-    open(FILE, "a").close()
+    open(FILE, "w").close()
 
-    done  = "\n Success! New storage created at\n~> %s" % (FILE)
+    done  = "<(Success)> ! New storage created at~> %s" % (FILE)
 
     print(c(done, "green"))
 

@@ -1,17 +1,8 @@
-# My py_memo
-
-### :exclamation: Currently under maintenance as of 10/04/19
-
-
----
-
-
 ![](./extras/py_memo.png)
 
+# __py_memo__
 
-
----
-
+### :exclamation: Currently under maintenance as of 10/04/19
 
 ## How to run:
 

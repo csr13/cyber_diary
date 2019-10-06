@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img width="460" height="300" src="./extras/py_memo.png">
+  <img width="350" height="250" src="./extras/py_memo.png">
 </p>
 
 

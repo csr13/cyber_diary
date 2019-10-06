@@ -54,9 +54,9 @@ class Menu:
     def menu_choice(self):
         ''' Gets a menu choice for the given menu main_choices '''
 
-        ticker  = c("<(:)>", "purple")
+        ticker  = c("<(:)>", "pink")
 
-        pointer = c(">", "blue")
+        pointer = c(">", "pink")
 
         choice = input("{} Option number {} ".format(ticker, pointer))
 
@@ -72,8 +72,10 @@ class Menu:
 
         except Exception:
 
+            error_ticker = c("<(!)>", "lightr")
             print(
-                '\n<(!)> Choices available {} \n'.format(
+                '\n{} Choices available {} \n'.format(
+                                                error_ticker,
                                                 ', '.join(self.main_choices)
                                                 )
                                             )

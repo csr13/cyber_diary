@@ -1,4 +1,8 @@
-![](./extras/py_memo.png)
+
+<p align="center">
+  <img width="460" height="300" src="./extras/py_memo.png">
+</p>
+
 
 # __py_memo__
 

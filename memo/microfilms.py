@@ -22,11 +22,11 @@ from time import time
 from colors import c
 from settings import NODE
 
-TIME   = c(str(datetime.now())[:10], "blue")
+TIME   = c(str(datetime.now())[:10], "pink")
 
 TITLE  = "<({})> ".format(NODE)
 
-MARGIN = c(('~=' * 25), "purple") + "\n" + "Date: %s" % (TIME)
+MARGIN = c(('~=' * 25), "blue") + "\n" + "Date: %s" % (TIME)
 
 main_menu_template = lambda: print('''
 {title:}

@@ -1,0 +1,8 @@
+# gits
+.git 
+
+# caches
+__pycache__
+
+# vscodez
+.vscode

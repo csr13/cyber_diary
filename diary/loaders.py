@@ -26,19 +26,25 @@ def load_storage(argv):
     """
     Handles making or setting current storage
     """
+    from settings import STOR_DIR
     try:
-        from settings import STOR_DIR
-        if argv[1] == "default":
+        
+        if not argv[1][-4:] == ".csv":
+            print(c("[!] new storage must be a .csv file", "yellow"))
+            exit(1)
+        
+        elif argv[1] == "default":
             storage = os.path.join(STOR_DIR, "entries.csv")
+
         else:
             storage = os.path.join(STOR_DIR, argv[1])
+
         if not os.path.exists(storage):
-            warnings.warn(c(f"[Fix] Creating storage: {FILE}", "yellow"))
-            raise FileNotFoundError() from None
+            warnings.warn(c(f"[Fix] Creating storage: {storage}", "yellow"))
+            open(storage, "w").close()
+            return storage
         return storage
-    except FileNotFoundError:
-        open(storage, "w").close()
-        return FILE
+        
     except IndexError:
         print(c("[Usage] : python<version> engine.py <storage>", "red"))
         exit(0)

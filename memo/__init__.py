@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# c.s.r
+# csr
 
 """
 Copyright 2019 C. S. R.
@@ -19,7 +19,5 @@ limitations under the License.
 
 
 __title__   = "Memo"
-
 __author__  = "C. S. R."
-
 __version__ = "0.0.1" 

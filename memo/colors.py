@@ -56,7 +56,6 @@ class Pincel(Palette):
 
 
 c = Pincel.pincelada
-
 flecha = c("> ", "purple")
 robot  = c("[", "pink")
 robot += c("*", "blue") + c("_", "red") + c("*", "blue")

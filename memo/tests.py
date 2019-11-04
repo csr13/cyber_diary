@@ -1,15 +1,26 @@
 # -*- coding: utf-8 -*-
 # c.s.r
 
+import os
 import unittest
 
 import components
 import torks
 import microfilms
 
+from settings import BASE_DIR
+
+TS = os.path.join(BASE_DIR, "storages", "test_storage.csv") 
+
+class BaseTest(unittest.TestCase):
+    def setUp(self):
+        self.ts = TS
+
+    def cleanUp(self):
+        pass 
 
 
-class TestFields(unittest.TestCase):
+class TestFields():
 
     def setUp(self):
         pass
@@ -24,7 +35,11 @@ class TestFields(unittest.TestCase):
         pass
 
 
-class TestCrudMethods(unittest.TestCase):
+class TestCrudMethods(BaseTest):
 
     def setUp(self):
         pass
+
+class TestPincel(unittest.TestCase):
+
+    def set

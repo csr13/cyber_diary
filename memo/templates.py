@@ -25,8 +25,6 @@ A = c("<(", "red")
 B = c(")>", "red") 
 MARGIN = ((c("~", "purple") + c("=", "red")) * 25 ) 
 
-from colors import c
-
 
 main_menu_template = lambda **x: print("""
 {title}

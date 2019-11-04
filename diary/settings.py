@@ -2,13 +2,9 @@
 # csr
 
 import os
-from datetime import datetime
 import sys
-import time
-import warnings
 
 from components import Menu
-from colors import c
 import loaders
 
 # Shortcuts

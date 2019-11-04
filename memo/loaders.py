@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 # csr
 
-import getpass
-import hashlib
 import os
 import time
 import warnings
@@ -44,4 +42,3 @@ def load_storage(argv):
     except IndexError:
         print(c("[Usage] : python<version> engine.py <storage>", "red"))
         exit(0)
-

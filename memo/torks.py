@@ -276,7 +276,6 @@ def paginate_entries(to_paginate, position):
             raise KeyboardInterrupt()
 
 
-
 def get_range_dates_matches(file):
     """
     Gets a range of dates, validates it.
@@ -315,7 +314,6 @@ def get_range_dates_matches(file):
     if len(matches) >= 1:
         return matches
     raise Exception('No matches.') from None
-
 
 
 def get_date_only(file):

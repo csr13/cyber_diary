@@ -6,3 +6,6 @@ __pycache__
 
 # vscodez
 .vscode
+
+#envs
+memovenv

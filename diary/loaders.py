@@ -27,9 +27,10 @@ def load_storage(argv):
     Handles making or setting current storage
     """
     from settings import STOR_DIR
+    
     try:
-        
-        if not argv[1][-4:] == ".csv":
+
+        if not argv[1][-4:] == ".csv" and not argv[1] == "default":
             print(c("[!] new storage must be a .csv file", "yellow"))
             exit(1)
         

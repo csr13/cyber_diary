@@ -1,16 +1,11 @@
-# -*- coding: utf-8 -*-
-# csr
-
 from datetime import datetime
+from sys import path
+path.append("..")
 
-from colors import c, robot
-from settings import NODE
-from templates import(
-    A,
-    B, 
-    MARGIN
-)
-from templates import (
+from core.colors import c, robot
+from config.settings import NODE
+from templates.templates import A, B, MARGIN
+from templates.templates import (
     credits_view_template,
     create_entry_template,
     date_search_view_template,

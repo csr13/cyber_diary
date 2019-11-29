@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# csr
-
 import os
 from collections import OrderedDict
 
@@ -45,7 +42,10 @@ class Palette():
 class Pincel(Palette):
 
     @classmethod
-    def pincelada(this, *args):
+    def pincelada(
+        this,
+        *args
+    ):
         text, color = args
         _c = Pincel()
         reset = _c.reset
@@ -55,11 +55,23 @@ class Pincel(Palette):
         return text
 
 
+# el pincel
 c = Pincel.pincelada
-flecha = c("> ", "purple")
-robot  = c("[", "pink")
-robot += c("*", "blue") + c("_", "red") + c("*", "blue")
-robot += c("]", "pink")
+
+tic_left  = "<("
+tic_right = ")>" 
+
+flecha    =  c("> ", "purple")
+optional  =  c(tic_left, "red")
+
+robot     =  c("[", "pink")
+robot     += c("*", "blue") + c("_", "red") + c("*", "blue")
+robot     += c("]", "pink")
+
+required  =  c(tic_left, "red")
+required  += c("required", "under_yellow")
+required  += c(tic_right, "red")
+
 
 
 

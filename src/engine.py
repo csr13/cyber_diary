@@ -1,44 +1,24 @@
-# -*- coding: utf-8 -*-
-# csr
-
-"""
-Copyright 2019 CSR
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-"""
 from time import sleep
 import re
 
-from colors import flecha, robot
-from components import Entry
-from torks import *
-from settings import (
+
+from core.torks import *
+from config.settings import (
     date_search_menu,
     FILE,
     main_menu,
     search_menu
 )
-from views import *
+from creative.colors import flecha, robot
+from storages.droppers import Entry
+from templates.views import *
 
 
 if __name__ == '__main__':
-
-# -------------------------------------------------------------------------
+# ------------------------
 # Initialize
 
-
     while True:
-
         try:
             wipe()
             main_view(FILE)
@@ -46,10 +26,8 @@ if __name__ == '__main__':
         except KeyboardInterrupt:
             break
 
-
 # -------------------------------------------------------------------------#
 # Create entry.
-
 
         if main_menu.current_choice == '1':
             while True:
@@ -72,7 +50,7 @@ if __name__ == '__main__':
                     break
 
 # -------------------------------------------------------------------------#
-# SEARCH MENU
+# Search menu
 
         elif main_menu.current_choice == '2':
             while True:

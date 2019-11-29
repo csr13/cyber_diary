@@ -1,31 +1,20 @@
-# -*- coding: utf-8 -*-
-# csr
-
-"""
-Copyright 2019 C. S. R.
-
-Licnsed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-"""
-
-import csv
 from collections import namedtuple
+import csv
 from datetime import datetime
 from os import system
 import re
 import sys
+sys.path.append("..")
+
 from time import sleep
 
-from colors import c, flecha
+
+from colors import (
+    c,
+    flecha,
+    optional,
+    required
+)
 from components import Entry
 from views import (
     error_view,
@@ -39,10 +28,13 @@ from settings import FILE
 from templates import MARGIN
 
 
+# Regex
+DATE_RE = r"(\d{2})/(\d{2})/(\d{4})"
+DATE_RANGE_RE = r"(\d{2})/(\d{2})/(\d{4})-(\d{2})/(\d{2})/(\d{4})"
+
 def wipe():
-    """
-    Console screen clearer
-    """
+    """Console screen clearer."""
+    
     if sys.platform[:3] == 'win' or sys.platform.startswith('win'):
         system('cls')
     else:
@@ -50,9 +42,7 @@ def wipe():
 
 
 def catch_display(err):
-    """
-    Takes in an error; passes it to error_view.
-    """
+    """Takes in an error; passes it to error_view."""
     wipe()
     error = str(err).capitalize()
     error_view(error=error)
@@ -69,19 +59,23 @@ def ver_var(var, err_m):
     else:
         raise Exception(err_m) from None
 
+def validate_date(date, regex):
 
-def date_field():
-    """
-    Get date; validate.
-    """
-    out_text = f'Date required {flecha}'
-    field = input(out_text)
     try:
-        if re.match(r'^\d{2}?/\d{2}?/\d{4}$', field):
-            t = re.match(r'^\d{2}?/\d{2}?/\d{4}$', field).group().split('/')
-            m, d, y = [int(x) for x in t]
-            date = datetime(year=y, month=m, day=d)
-            return '/'.join(t)
+        if re.match(DATE_RE, field):
+            import pdb
+            pdb.set_trace()
+            date_group = re.match(DATE_RE, field).group()
+            
+            to_return  = date_group.split("/")
+            
+            # degroup
+            month = date_group(1).__int__()
+            day   = date_group(2).__int_()
+            year  = date_group(3).__int__()
+            date = datetime(year=year, month=month, day=day)
+            
+            return '/'.join()
         else:
             raise Exception('Wrong date format') from None
     except ValueError as err:
@@ -90,33 +84,49 @@ def date_field():
         raise Exception(err)
 
 
+def date_field():
+    """Get date; validate."""
+    out_text = '{} {}'.format(c("Date required", "under_white"), flecha)
+    field = input(out_text)
+    
+
 
 def string_field(required=True, place_holder=False):
     """
     Get a string sequence
     """
     if required == True:
-        if place_holder: out_text = f'{place_holder} required {flecha} '
+        
+        if place_holder:
+            place_holder = c(place_holder, "underwhite")
+            out_text = f'{place_holder} {required} {flecha} '
         else:
-            out_text = f"String field required {flecha} "
+            place_holder = c("String field")
+            out_text = f"{place_holder} {required} {flecha} "
+        
         field = input(out_text)
         try:
             if re.search(r'[\w\d]+', field).group():
                 return field
-            else:
-                raise AttributeError()
         except AttributeError:
             return string_field(required=required, place_holder=place_holder)
 
     elif required == False:
+        
         if place_holder:
-            out_text = f"{place_holder} optional {flecha}"
+            place_holder = c(place_holder, "underwhite")
+            out_text = f'{place_holder} {optional} {flecha} '
         else:
-            out_text = f"String field optional {flecha}"
+            place_holder = c("String field", "under_white")
+            out_text = f"{place_holder} {optional} {flecha}"
+        
         field = input(out_text)
-        if re.match(r'^\s*$', field):
-            return '<Field empty>'
-        return field
+        try:
+            if re.match(r'^\s*$', field).group():
+                return field
+        except AttributeError:
+            return "<Field empty>"
+
     return False
 
 
@@ -130,27 +140,48 @@ def minutes_field():
     return minutes
 
 
-def create_entry(retrn=None):
+def create_entry(**kwargs):
     """
     create_entry(retrn='only_post') will only post context to csv
     create_entry(retrn='all') will return all without posting.
     """
-    date = date_field()
-    task = string_field(required=True, place_holder='Task')
-    time = minutes_field()
-    notes = string_field(required=False, place_holder='Notes')
-    context = {
-        'date' : date,
-        'task' : task,
-        'time' : time,
-        'notes' : notes
-    }
-    if retrn == 'only_post':
-        context['file'] = FILE
-        Entry.save(**context)
-    elif retrn == "all":
-        return [v for v in context.values()]
-    return False
+    if 'return' in kwargs:
+        
+        return_option = kwargs['return']
+
+        date = date_field()
+
+        task = string_field(
+            required=True,
+            place_holder=c("Task", "under_white") + flecha
+        )
+
+        time = minutes_field()
+
+        notes = string_field(
+            required=False,
+            place_holder=c("Notes", "under_white") + flecha
+        )
+
+        contexto = {
+            'date' : date,
+            'task' : task,
+            'time' : time,
+            'notes' : notes
+        }
+
+        if return_option == 'only_post':
+            # Give the file to post only
+            contexto['file'] = FILE
+            # save the context
+            Entry.save(**contexto)
+
+            return True
+
+        elif return_option == "all":
+            return [v for v in context.values()]
+        
+        return False
 
 
 def update_entry(file, to_update, trick):

@@ -9,14 +9,14 @@ sys.path.append("..")
 from time import sleep
 
 
-from colors import (
+from creative.colors import (
     c,
     flecha,
     optional,
     required
 )
-from components import Entry
-from views import (
+from storages.droppers import Entry
+from templates.views import (
     error_view,
     detail_view,
     create_entry_view,
@@ -24,17 +24,17 @@ from views import (
     update_entry_view,
     deleted_entry_view
 )
-from settings import FILE
-from templates import MARGIN
+from config.settings import FILE
+from templates.templates import MARGIN
+from validators.validators import validate_date
 
 
-# Regex
 DATE_RE = r"(\d{2})/(\d{2})/(\d{4})"
 DATE_RANGE_RE = r"(\d{2})/(\d{2})/(\d{4})-(\d{2})/(\d{2})/(\d{4})"
 
+
 def wipe():
     """Console screen clearer."""
-    
     if sys.platform[:3] == 'win' or sys.platform.startswith('win'):
         system('cls')
     else:
@@ -50,60 +50,31 @@ def catch_display(err):
 
 
 def ver_var(var, err_m):
-    """
-    Check for a value; raise err_m if empty var.
-    """
+    """Check for a value; raise err_m if empty var."""
     if var:
         if var != '':
             pass
     else:
         raise Exception(err_m) from None
 
-def validate_date(date, regex):
-
-    try:
-        if re.match(DATE_RE, field):
-            import pdb
-            pdb.set_trace()
-            date_group = re.match(DATE_RE, field).group()
-            
-            to_return  = date_group.split("/")
-            
-            # degroup
-            month = date_group(1).__int__()
-            day   = date_group(2).__int_()
-            year  = date_group(3).__int__()
-            date = datetime(year=year, month=month, day=day)
-            
-            return '/'.join()
-        else:
-            raise Exception('Wrong date format') from None
-    except ValueError as err:
-        raise Exception(err)
-    except AttributeError as err:
-        raise Exception(err)
-
 
 def date_field():
     """Get date; validate."""
     out_text = '{} {}'.format(c("Date required", "under_white"), flecha)
     field = input(out_text)
+    validate_date(field)
     
 
 
 def string_field(required=True, place_holder=False):
-    """
-    Get a string sequence
-    """
-    if required == True:
-        
+    """Get a string sequence"""
+    if required == True: 
         if place_holder:
             place_holder = c(place_holder, "underwhite")
             out_text = f'{place_holder} {required} {flecha} '
         else:
             place_holder = c("String field")
             out_text = f"{place_holder} {required} {flecha} "
-        
         field = input(out_text)
         try:
             if re.search(r'[\w\d]+', field).group():
@@ -112,14 +83,12 @@ def string_field(required=True, place_holder=False):
             return string_field(required=required, place_holder=place_holder)
 
     elif required == False:
-        
         if place_holder:
             place_holder = c(place_holder, "underwhite")
             out_text = f'{place_holder} {optional} {flecha} '
         else:
             place_holder = c("String field", "under_white")
             out_text = f"{place_holder} {optional} {flecha}"
-        
         field = input(out_text)
         try:
             if re.match(r'^\s*$', field).group():
@@ -131,9 +100,7 @@ def string_field(required=True, place_holder=False):
 
 
 def minutes_field():
-    """
-    Get minutes
-    """
+    """Get minutes"""
     minutes = input(f'Time (rounded minutes) {flecha} ')
     if not re.match(r'^\d*$', minutes.strip()):
         raise Exception(f'Rounded minutes only, e.g. {flecha} 20')
@@ -141,47 +108,34 @@ def minutes_field():
 
 
 def create_entry(**kwargs):
-    """
-    create_entry(retrn='only_post') will only post context to csv
+    """create_entry(retrn='only_post') will only post context to csv
     create_entry(retrn='all') will return all without posting.
     """
-    if 'return' in kwargs:
-        
-        return_option = kwargs['return']
+    if 'option' in kwargs:
+        return_option = kwargs['option']
+    else:
+        raise Exception("we need an option")
 
-        date = date_field()
-
-        task = string_field(
-            required=True,
-            place_holder=c("Task", "under_white") + flecha
-        )
-
-        time = minutes_field()
-
-        notes = string_field(
-            required=False,
-            place_holder=c("Notes", "under_white") + flecha
-        )
-
-        contexto = {
-            'date' : date,
-            'task' : task,
-            'time' : time,
-            'notes' : notes
-        }
-
-        if return_option == 'only_post':
-            # Give the file to post only
-            contexto['file'] = FILE
-            # save the context
-            Entry.save(**contexto)
-
-            return True
-
-        elif return_option == "all":
-            return [v for v in context.values()]
-        
-        return False
+    task_place_holder = c("Task", "under_white") + flecha
+    note_place_holder = c("Notes", "under_white") + flecha
+    date = date_field()
+    task = string_field(required=True, place_holder=task_place_holder)
+    time = minutes_field()
+    notes = string_field(required=False,place_holder=note_place_holder)
+    contexto = {
+        'date' : date,
+        'task' : task,
+        'time' : time,
+        'notes' : notes
+    }
+    if return_option == 'only_post':
+        contexto['file'] = FILE
+        Entry.save(**contexto)
+        return True
+    elif return_option == "all":
+        return [v for v in context.values()]
+    
+    return False
 
 
 def update_entry(file, to_update, trick):

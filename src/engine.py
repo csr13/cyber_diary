@@ -34,7 +34,7 @@ if __name__ == '__main__':
                 try:
                     wipe()
                     create_entry_view()
-                    create_entry(retrn='only_post')
+                    create_entry(option='only_post')
                     print("Storing %s" % (c(" . . . ", "blue")))
                     sleep(1.5)
                     success_entry_view()

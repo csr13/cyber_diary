@@ -2,7 +2,7 @@ from datetime import datetime
 from sys import path
 path.append("..")
 
-from core.colors import c, robot
+from creative.colors import c, robot
 from config.settings import NODE
 from templates.templates import A, B, MARGIN
 from templates.templates import (
@@ -98,7 +98,7 @@ def list_view(title):
 
 
 def main_view(current_storage):
-    current_storage = current_storage.split("/")[-1]
+    current_storage = str(current_storage).split("/")[-1]
     stor_mes = c("Loaded storage", "under_white")
     current_storage = c(current_storage, "pink")
     user = c("Username", "under_white")

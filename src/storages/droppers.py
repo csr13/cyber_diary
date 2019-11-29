@@ -9,8 +9,6 @@ class Entry:
         if "file" in kwargs and len(kwargs) > 2:
             file = kwargs.get('file')
             kwargs.__delitem__('file')
-        else:
-
         for key in kwargs.keys():
             field_names.append(key)
 

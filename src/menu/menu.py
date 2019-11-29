@@ -1,7 +1,7 @@
 from sys import path
-path.append("..", ".")
+path.append("..")
 
-from colors import c
+from creative.colors import c
 
 
 class Menu:
@@ -23,7 +23,7 @@ class Menu:
         pointer = c(">", "pink")
         ticker  = c("<(:)>", "pink")
         error_ticker = c("<(!)>", "lightr")
-
+        choices = ", ".join(self.main_choices)
         choice  = input(f"{ticker} {text} {pointer} ")
         # try to see if the choice is in the list of choices.
         try:
@@ -33,6 +33,6 @@ class Menu:
                 raise
         except Exception:
             # if not then error message and try again.
-            error_message = f"\n{error_ticker} Choices available {choices}" 
+            error_message = f"\n{error_ticker} Choices available {choices}\n" 
             print(error_message)
             self.menu_choice()

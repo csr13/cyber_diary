@@ -1,4 +1,6 @@
-from colors import c, flecha, robot
+import sys
+
+from .colors import c, flecha, robot
 
 usage_banner = f"""
 {robot}

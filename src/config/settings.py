@@ -1,4 +1,6 @@
 import os
+import pathlib
+import pdb
 import sys
 sys.path.append("..")
 
@@ -8,27 +10,27 @@ from core import loaders
 # machine info.
 NODE = loaders.load_login()
 
-# directories.
-# = = = = = = = = = = = = = =
+# Joins
+MAIN_DIR         = os.getcwd()
+STORAGE_DIR      = os.path.join(MAIN_DIR, "storages")
+MAIN_STORAGE_DIR = os.path.join(STORAGE_DIR, "main_storages")
+TEST_STORAGE_DIR = os.path.join(STORAGE_DIR, "test_storages")
 
-# this dir
-# - - - - -
-BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)))
+# Paths
+MAIN_PATH         = pathlib.Path(MAIN_DIR)
+STORAGE_PATH      = pathlib.Path(STORAGE_DIR)
+MAIN_STORAGE_PATH = pathlib.Path(MAIN_STORAGE_DIR)
+TEST_STORAGE_PATH = pathlib.Path(TEST_STORAGE_DIR)
 
-# storage directories.
-# - - - - - - - - - - -
-MAIN_STORAGE_DIR = os.path.join(BASE_DIR, 'storages', "diary")
-if not os.path.exists(MAIN_STORAGE_DIR):
-    os.mkdir(MAIN_STORAGE_DIR)
+if not STORAGE_PATH.exists():
+    STORAGE_PATH.mkdir()
 
-TEST_SOTRAGE_DIR = os.path.join(BASE_DIR, "test_storages")
-if not os.path.exists(TEST_SOTRAGE_DIR):
-    os.mkdir(TEST_SOTRAGE_DIR)
+if not MAIN_STORAGE_PATH.exists():
+    MAIN_STORAGE_PATH.mkdir()
 
-# file
-# = = = =
+if not TEST_STORAGE_PATH.exists():
+    TEST_STORAGE_PATH.mkdir()
 
-# pass sys.argv, ir contains the storage to load the file from.
 FILE = loaders.load_storage(sys.argv)
 
 # menus

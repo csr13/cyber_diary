@@ -3,7 +3,7 @@ from sys import path
 
 path.append("..")
 
-from core.colors import c 
+from creative.colors import c 
 
 A = c("<(", "red")
 B = c(")>", "red") 

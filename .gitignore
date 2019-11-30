@@ -9,3 +9,7 @@ __pycache__
 
 #envs
 memovenv
+
+#folders
+main_storages
+test_storages

@@ -30,18 +30,17 @@ def load_login():
 
 def load_storage(argv):
     """Load a storage for the diary"""
-    from config.settings import MAIN_STORAGE_DIR # avoid circular imports.
+    from config.settings import MAIN_STORAGE_DIR 
     try:
-        print(argv)
         _storage_path = pathlib.Path(MAIN_STORAGE_DIR)
         _name = argv[1] 
-        _check = _name[:-4] 
+        _check = _name[-4:] 
         
         if not _name == "default" and not _check == ".csv":
-            _error = "[!] storage must be csv"
+            _error = "\n[!] storage must be csv"
             _pretty_error = c(_error, "red")
             warnings.warn(_pretty_error)
-            exit(1)
+            return False
         elif _name == "default":
             _storage_file = _storage_path / "default.csv"
         else:
@@ -50,13 +49,14 @@ def load_storage(argv):
         if _storage_file.is_file():
             return _storage_file
 
-        _error = f"[!] creating storage: {_storage_file}"
+        _error = f"\n[!] creating storage: {_storage_file}"
         _pretty_error = c(_error, "pink")
         open(_storage_file, "w").close()
         return _storage_path / _storage_file
 
     except IndexError:
-        _error = "[!] usage: python<version> engine.py <storage>"
+        # this works and is tested
+        _error = "\n[!] usage: python<version> engine.py <storage>"
         _pretty_error = c(_error, "red")
-        warnings.warn(_pretty_error)
-        exit(1)
+        raise UserWarning(_pretty_error)
+

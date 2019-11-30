@@ -1,21 +1,24 @@
 Cyber Diary
 
-Currently under maintenance as of 11/02/19
+Hello, this is the experimental branch, for a 'stable' version head over to the testing branch. 
 
-How to start
--------------
+Experiment$:
+------------
 
-[*] Download or clone repo.
+TE$TING: [started]
+-----------------------------------------------------
 
-[*] Run the `engine.py` file with an extra `<storage.csv>` as the name of the storage you want to use -- make sure the storage is inside the `storages` directory of the memo dir.
+[*] Test the loader [done]
+[*] Test the torks  [not done]
+[*] Test droppers   [not done]
 
+APPEARANCE FEATURES: [not started]
+-----------------------------------------------------
+[*] Change the color of the text.
+[*] Text wrap where you can.
 
-python<version> engine.py <storage.csv>
-
-TO DO:
-[*] Tests
-[*] Test components
-[*] Test torks
+EXPERIMENTAL FUTURES: [not started]
+-----------------------------------------------------
 [*] Function to change storages from the menu.
 [*] Functions to copy storages from other locations.
 [*] Functions to back_up storages.

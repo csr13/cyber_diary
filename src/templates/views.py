@@ -98,6 +98,7 @@ def list_view(title):
 
 
 def main_view(current_storage):
+    # fix this for ms console && powershell
     current_storage = str(current_storage).split("/")[-1]
     stor_mes = c("Loaded storage", "under_white")
     current_storage = c(current_storage, "pink")
@@ -109,18 +110,16 @@ def main_view(current_storage):
         "title"  : f"{robot} {title}",
         "node"   : f"{user} ~> {A}{NODE}{B}",
         "storage": f"{stor_mes} ~> {A}{current_storage}{B}",
-        "uno"    : c('<(1)> ', "purple") + c('Create entry', "under_white"),
-        "dos"    : c('<(2)> ', "purple") + c('Search entries', "under_white"),
-        "tres"   : c('<(3)> ', "purple") + c('Notes', "under_white"),
-        "cuatro" : c('<(4)> ', "purple") + c('Quit | Ctl-c', "under_white"),    
+        "uno"    : c('<(1)> ', "green") + c('Create entry', "under_white"),
+        "dos"    : c('<(2)> ', "green") + c('Search entries', "under_white"),
+        "tres"   : c('<(3)> ', "green") + c('Notes', "under_white"),
+        "cuatro" : c('<(4)> ', "green") + c('Quit | Ctl-c', "under_white"),    
     }
     main_menu_template(**x)
 
 
 def search_view():
-    """
-    Displays the search view. Composes a context menu.
-    """
+    """Displays the search view. Composes a context menu."""
     x = {
         "title" : '%s %s' % (robot, c("Search Menu", "under_white")),
         "margin" : MARGIN

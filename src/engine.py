@@ -40,12 +40,6 @@ if __name__ == '__main__':
                     success_entry_view()
                     sleep(1.5)
                     break
-                except Exception as err:
-                    try:
-                        catch_display(err)
-                        continue
-                    except KeyboardInterrupt:
-                        continue
                 except KeyboardInterrupt:
                     break
 
@@ -70,8 +64,9 @@ if __name__ == '__main__':
                             wipe()
                             title = f"{robot} Task Name Search"
                             list_view(title=title)
-                            name = string_field(required=True,
-                                         place_holder='Entry name')
+                            name = string_field(
+                                required=True, place_holder='Entry name'
+                            )
                             ver_var(name, 'Invalid input.')
                             entries = Entry.retreive(file=FILE)
                             ver_var(entries, 'Lack of entries.')

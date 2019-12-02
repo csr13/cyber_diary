@@ -79,12 +79,13 @@ def date_field():
     except ValueError as o_o:
         o_o = c(o_o, "lightr")
         print(o_o)
-        date_field()
+        return date_field()
     # except a format error.
     except AttributeError as e_e:
         e_e = c(e_e, "lightr")
         print(e_e)
-        date_field()
+        # lets see if this has the same effect
+        return date_field() 
 
     
 

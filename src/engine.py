@@ -13,6 +13,15 @@ from creative.colors import flecha, robot
 from storages.droppers import Entry
 from templates.views import *
 
+def main_scene():
+
+    while True:
+        try:
+            wipe()
+            main_view(FILE)
+            main_menu.menu_choice()
+        except KeyboardInterrupt:
+            break
 
 if __name__ == '__main__':
 # ------------------------

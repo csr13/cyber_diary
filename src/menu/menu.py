@@ -64,13 +64,13 @@ class Menu:
     def get_choice(self):
         """Get a choice from the user"""
         # prompt for a choice
-        choice  = input(f"{ticker} {text} {pointer} ")
+        choice  = input(f"{ticker} {menu_text} {pointer} ")
         # return the choice
         return choice
 
 
     def pick(self):
-        choice = get_choice()
+        choice = self.get_choice()
         if self.current_choice == None:
             self.pick()
         self.set_current_choice(choice)

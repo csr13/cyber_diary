@@ -55,7 +55,7 @@ class Pincel(Palette):
         return text
 
 
-# el pincel
+# the main brush
 c = Pincel.pincelada
 
 tic_left  = "<("
@@ -71,6 +71,13 @@ robot     += c("]", "pink")
 required  =  c(tic_left, "red")
 required  += c("required", "under_yellow")
 required  += c(tic_right, "red")
+
+
+# these are for the menu.
+menu_text = c("Option number", "under_white")
+ticker    = c("<(:)>", "pink")
+pointer   = c(">", "pink")
+
 
 
 

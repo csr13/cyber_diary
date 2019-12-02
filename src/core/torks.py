@@ -125,7 +125,7 @@ def string_field(required=True, place_holder=False):
         # get input
         field = input(out_text)
         # if the input is not just space, return it
-        if not re.match(r'^\s*$', field)
+        if not re.match(r'^\s*$', field):
             return field
         # otherwise return a field empty string.
         return "<Field empty>"
@@ -277,6 +277,9 @@ def enumerate_matches(matches):
         # otherwise if the input is not a 
         else:
             raise Exception("Can't verify the input") from None
+    # this is a quick patch for testing, the testing branch contains a stable version.
+    except:
+        raise KeyboardInterrupt()
 
 
 def paginate_entries(to_paginate, position):
